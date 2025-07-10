@@ -82,11 +82,25 @@ def lambda_handler(event, context):
                 "statusCode": 500,
                 "body": json.dumps({"error": "Model returned empty template"})
             }
+        # Slug Defination
+        def slugify_text(text: str) -> str:
+            """Convert request text into a slug-safe filename part."""
+            text = text.lower()
+            text = re.sub(r"[^\w\s-]", "", text)
+            text = re.sub(r"[\s_-]+", "-", text)
+            return text[:40].strip("-")  # limit to 40 characters
 
-        # Save to S3
+        
+        
+        # Create a safe filename from the request
+        slug = slugify_text(request_text)
         timestamp = datetime.utcnow().strftime('%Y%m%d%H%M%S')
-        s3_key = f"cloudformation/generated-template-{timestamp}.yaml"
+        s3_key = f"cloudformation/{slug}-{timestamp}.yaml"
         save_to_s3(s3_key, yaml_template)
+        # Save to S3
+        #timestamp = datetime.utcnow().strftime('%Y%m%d%H%M%S')
+        #s3_key = f"cloudformation/generated-template-{timestamp}.yaml"
+        #save_to_s3(s3_key, yaml_template)
 
         return {
             "statusCode": 200,
