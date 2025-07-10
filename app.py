@@ -1,6 +1,7 @@
 import boto3
 import botocore.config
 import json
+import re
 from datetime import datetime
 
 def blog_generate_using_bedrock(blogtopic: str) -> str:
@@ -67,10 +68,15 @@ def lambda_handler(event, context):
             }
 
         generated_blog = blog_generate_using_bedrock(blogtopic=blogtopic)
+        
+        def sanitize_filename(input_text: str) -> str:
+            # Convert to lowercase, remove unsafe characters, and limit length
+            filename = re.sub(r'[^a-zA-Z0-9_\-]', '_', input_text.strip())
+            return filename[:50]  # limit to 50 characters to avoid long S3 keys
 
         if generated_blog:
-            current_time = datetime.now().strftime('%H%M%S')
-            s3_key = f"blog-output/{current_time}.txt"
+            sanitized_title = sanitize_filename(blogtopic)
+            s3_key = f"blog-output/{sanitized_title}.txt"
             s3_bucket = 'aws-bedrock-praful'
             save_blog_details_s3(s3_key, s3_bucket, generated_blog)
         else:
@@ -87,3 +93,5 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': json.dumps({'error': str(e)})
         }
+
+        
