@@ -1,0 +1,5 @@
+#create a folder with name boto3_layer
+#cd to boto3_layer
+#pip install boto3 -t python/
+#pip install pyYAML -t python/
+#pip install cfn-lint -t python/
