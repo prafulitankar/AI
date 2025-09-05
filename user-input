@@ -1,0 +1,25 @@
+{
+    "cfn_request": "Create a S3 bucket named testprftngp"
+}
+//
+{
+    "cfn_request": "Create a EC2 Named=testprftngp12",
+    "parameters": {
+      "KeyName" : "bedrock"
+  }
+}
+//
+{
+    "cfn_request": "Create a VPC with name testvpc",
+    "parameters": {
+      "KeyName" : "bedrock"
+  }
+}
+//
+{
+    "cfn_request": "Create a VPC with name testvpc1 with 2 subnet 1 is public and another is private with SG , and Internet Gateway,",
+    "parameters": {
+      "KeyName" : "bedrock"
+  }
+}
+//
