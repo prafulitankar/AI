@@ -3,3 +3,4 @@
 #pip install boto3 -t python/
 #pip install pyYAML -t python/
 #pip install cfn-lint -t python/
+#pip install requests -t python/
