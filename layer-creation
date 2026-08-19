@@ -1,3 +1,4 @@
+Run all commands in Win Powershell as Administrator
 #create a folder with name boto3_layer
 #cd to boto3_layer
 #pip install boto3 -t python/
