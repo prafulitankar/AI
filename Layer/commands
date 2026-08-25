@@ -2,7 +2,7 @@ Run all commands in Win Powershell as Administrator (boto3,pyYAML,cfn-lint,reque
 #create a folder with name boto3_layer
 #cd to boto3_layer
 #pip install boto3 -t python/
-#pip install pyYAML -t python/docker run --rm -v ${PWD}:/output lambda-pydantic cp /lambda-package.zip /output/
+#pip install pyYAML -t python/
 #pip install cfn-lint -t python/
 #pip install requests -t python/
 
